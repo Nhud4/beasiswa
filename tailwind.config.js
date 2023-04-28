@@ -9,7 +9,8 @@ module.exports = {
       'white': '#FFFFFF',
       'primary': {
         '10': '#237B9F',
-        '20': '#51ABC5'
+        '20': '#51ABC5',
+        '30': '#BEC8FF'
       },
       'natural': {
         '10': '#3DDE43',
@@ -37,7 +38,7 @@ module.exports = {
         '20': '20px'
       },
       boxShadow: {
-        '1': '0px 4px 24px rgba(0, 0, 0, 0.05)',
+        '1': '0px 8px 24px rgba(0, 0, 0, 0.1)',
         '2': '0px 4px 10px 0px rgba(0, 0, 0, 0.1)'
       },
     },

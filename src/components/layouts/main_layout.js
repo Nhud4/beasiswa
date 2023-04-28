@@ -8,7 +8,7 @@ export default function MainLayout(props) {
     <>
       <Header />
       <Sidebar />
-      <main className="pl-[16%] pt-[12%] pr-5">{children}</main>
+      <main className="pt-28">{children}</main>
     </>
   );
 }
