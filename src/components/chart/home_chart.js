@@ -5,26 +5,17 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  labels: ['Red', 'Blue'],
   datasets: [
     {
       label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      data: [12, 19],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 117, 85, 1)',
+        'rgba(35, 123, 159, 1)',
       ],
       borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
+        'rgba(255, 255, 255, 1)'
       ],
       borderWidth: 1,
     },
@@ -32,5 +23,27 @@ export const data = {
 };
 
 export function HomeChart() {
-  return <Doughnut data={data} />;
+  return(
+    <>
+      <div className="bg-white py-4 px-2 rounded-lg shadow-1">
+        <Doughnut data={data} />
+        <div className="flex justify-center items-center space-x-2 mt-4">
+          <div className="border border-nero-20 rounded-md p-1 text-14">
+            <div className="text-center font-medium">200 Mahasiswa</div>
+            <div className="flex justify-center items-center">
+              <div className="bg-primary-10 w-3 h-3 rounded-full mr-2"/>
+              <div className="text-primary-10">Lolos</div>
+            </div>
+          </div>
+          <div className="border border-nero-20 rounded-md p-1 text-14">
+            <div className="text-center font-medium">200 Mahasiswa</div>
+            <div className="flex justify-center items-center">
+              <div className="bg-danger-10 w-3 h-3 rounded-full mr-2"/>
+              <div className="text-danger-10">Tidak Lolos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
