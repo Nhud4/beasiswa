@@ -4,7 +4,7 @@ import { GrNext } from 'react-icons/gr';
 
 export default function HomeTable(){
   return(
-    <div className="bg-white w-full rounded p-2 rounded-lg shadow">
+    <div className="bg-white w-full rounded p-2 rounded-lg shadow-1">
       <div className="py-2 flex justify-between items-center">
         <h2>Data Mahasiswa</h2>
       </div>

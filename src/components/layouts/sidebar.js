@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiHome } from 'react-icons/hi';
 import { HiDocumentText } from 'react-icons/hi2';
 
-export default function Sidebar(){
-  const [select, setSelect] = useState(true);
+export default function Sidebar({ active }){
 
   const data = [
     'bg-primary-20 text-white',
     'bg-white text-primary-20 hover:bg-primary-20 hover:text-white'
   ];
   return(
-    <div className="absolute left-0 top-0 h-full w-[13rem] p-2">
-      <div className="w-full h-full rounded-md bg-white shadow">
+    <div className="fixed left-0 top-0 h-full w-[13rem] p-2">
+      <div className="w-full h-full rounded-md bg-white shadow-1">
         <div className="p-4">
           <div className="flex justify-center items-center">
             <Image className="w-[8rem] mr-2" src={require('@/assets/img/logo1.svg')} alt="icon" />
@@ -24,17 +23,24 @@ export default function Sidebar(){
           </div>
         </div>
         <ul>
-          <li className={`pl-4 mb-1 ${select? data[0]:data[1]}`}>
-            <Link className="flex justify-start items-center font-medium h-10" href="#" onClick={() => setSelect(true)}>
+          <li className={`pl-4 mb-1 ${active ? data[0]:data[1]}`}>
+            <Link className="flex justify-start items-center font-medium h-10" href="/">
               <HiHome className="text-22 mr-2"/> Home
             </Link>
           </li>
-          <li className={`pl-4 ${select? data[1]:data[0]}`}>
-            <Link className="flex justify-start items-center font-medium h-10" href="#" onClick={() => setSelect(false)}>
+          <li className={`pl-4 ${active ? data[1]:data[0]}`}>
+            <Link className="flex justify-start items-center font-medium h-10" href="/input-data">
               <HiDocumentText className="text-22 mr-2"/> Form Input Data
             </Link>
           </li>
         </ul>
+        <div className="absolute inset-x-0 bottom-0">
+          <div className="p-8">
+            <div className="flex justify-center items-center">
+              <Link className="bg-danger-20 text-white p-2 w-full rounded-lg text-center" href="/login">Keluar</Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
