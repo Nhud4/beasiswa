@@ -8,7 +8,6 @@ export const data = {
   labels: ['Red', 'Blue'],
   datasets: [
     {
-      label: '# of Votes',
       data: [12, 19],
       backgroundColor: [
         'rgba(255, 117, 85, 1)',
@@ -26,7 +25,14 @@ export function HomeChart() {
   return(
     <>
       <div className="bg-white py-4 px-2 rounded-lg shadow-1">
-        <Doughnut data={data} />
+        <Doughnut data={data}
+          options={{
+            plugins:{
+              legend: {
+                display: false
+              }
+            }
+          }}/>
         <div className="flex justify-center items-center space-x-2 mt-4">
           <div className="border border-nero-20 rounded-md p-1 text-14">
             <div className="text-center font-medium">200 Mahasiswa</div>
