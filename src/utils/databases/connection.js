@@ -1,6 +1,6 @@
 import clientPromise from './mongoDB';
 
-async function post(data, collection){
+async function insertOne(data, collection){
   const client = await clientPromise;
   const db = await client.db('beasiswa');
 
@@ -9,15 +9,24 @@ async function post(data, collection){
   return post;
 };
 
-async function getAll(collection){
+async function findAll(collection){
   const client = await clientPromise;
   const db = await client.db('beasiswa');
-  const getData = await db.collection(collection).find({}).toArray();
+  const data = await db.collection(collection).find({}).toArray();
 
-  return getData;
+  return data;
+}
+
+async function findOne(params, collection){
+  const client = await clientPromise;
+  const db = await client.db('beasiswa');
+  const data = await db.collection(collection).findOne(params);
+
+  return data;
 }
 
 export {
-  post,
-  getAll
+  insertOne,
+  findAll,
+  findOne
 };

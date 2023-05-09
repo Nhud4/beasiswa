@@ -1,7 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getAll } from '@/utils/databases/connection';
+import { ObjectId } from 'mongodb';
+import { findOne } from '@/utils/databases/connection';
 
 export default async function handler(req, res) {
-  const data = await getAll('mahasiswa');
-  res.status(200).json(data);
+  const payload = { ...req.query, ...req.body };
+  payload.methode = req.method;
+
+  const etst = await findOne({ _id: new ObjectId(payload.userID) }, 'mahasiswa');
+  res.status(200).json(etst);
 }

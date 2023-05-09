@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '@/components/layouts/sidebar';
 import Header from '@/components/layouts/header';
-import Form from '@/components/form';
+import FormInput from '@/components/form/form_input';
 
 export default function InputData(){
   return(
@@ -9,10 +9,8 @@ export default function InputData(){
       <Header />
       <Sidebar />
       <div className="flex justify-center mt-8">
-        <div className="container mt-[2.5rem]">
-          <div className="flex justify-start bg-white rounded-lg p-3 shadow-1">
-            <Form />
-          </div>
+        <div className="container mt-[2.5rem] p-3">
+          <FormInput />
         </div>
       </div>
     </>

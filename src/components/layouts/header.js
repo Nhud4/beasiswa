@@ -6,7 +6,7 @@ import SummaryCard from '../card/summary';
 export default function Header({ summary }){
   return(
     <>
-      <div className="fixed left-0 top-0 w-full bg-primary-10 h-[8rem]">
+      <div className="absolute left-0 top-0 w-full bg-primary-10 h-[8rem]">
         <div className="pl-[13.5rem] pr-5 pt-5">
           <div className="flex justify-between mb-8">
             <div className="text-white">
