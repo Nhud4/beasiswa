@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Server from '@/utils/server';
+import { saveToken } from '@/utils/server/localstorage';
 
 export default function LoginForm(){
   const router = useRouter();
+  const server = new Server();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handelSubmite = (e) =>{
+  const handelSubmite = async(e) =>{
     e.preventDefault();
-    if(username === 'admin' && password === 'admin'){
-      router.push('/');
-    }else{
+    try{
+      const result = await server.login(username, password);
+      if(result){
+        saveToken(result.accessToken, result.expAccessToken);
+
+        router.push('/');
+      }
+    }catch(err){
       alert('username atau password salah');
     }
   };
