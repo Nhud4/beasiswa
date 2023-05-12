@@ -19,4 +19,16 @@ export default class Server{
 
     return result.data;
   }
+
+  async listData(){
+    const endPoint = '/api/data/list';
+    const options ={
+      method: 'GET'
+    };
+
+    const response = await fetch(endPoint, options);
+    const result = await response.json();
+
+    return result.data;
+  }
 }

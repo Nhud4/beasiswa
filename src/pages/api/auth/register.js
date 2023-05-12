@@ -11,7 +11,7 @@ export default async function register(req, res){
   if(insert.err) return wrapper.responseError(res, insert.err);
   delete payload.password;
 
-  return wrapper.respons(res, 200, {
+  return wrapper.response(res, 200, {
     message: 'register success',
     code: 201,
     data: { ...payload },

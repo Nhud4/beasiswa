@@ -9,7 +9,7 @@ async function insertOne(data, collection){
     const client = await clientPromise;
     const db = await client.db('beasiswa');
     const recordset = await db.collection(collection).insertOne(data);
-    if (recordset.insertedCount !== 1) {
+    if (recordset.acknowledged === false) {
       return wrapper.error('Failed Inserting Data to Database');
     }
 
@@ -74,9 +74,50 @@ async function findPaginated(sortByfield, size, page, params, sortBy = null){
   }
 }
 
+async function updateOne(params, updateDocument, increment){
+  const query =  {};
+  if (increment){
+    query.$inc = increment;
+  }
+  if (updateDocument){
+    query.$set = updateDocument;
+  }
+  try{
+    const client = await clientPromise;
+    const connection = await client.db('beasiswa');
+    const db = await connection.collection('mahasiswa');
+    const data = await db.updateOne(params, query);
+    if (data.modifiedCount >= 0) {
+      const recordset = await this.findOne(params);
+      return wrapper.data(recordset.data);
+    }
+
+    return wrapper.error('Failed updating data');
+  }catch(err){
+    return wrapper.error(`Error Update One Mongo ${err.message}`);
+  }
+}
+
+async function deleteData(params, collection){
+  try{
+    const client = await clientPromise;
+    const connection = await client.db('beasiswa');
+    const recordset = await connection.collection(collection).deleteOne(params);
+    if (recordset.deletedCount > 0) {
+      return wrapper.data(true);
+    }
+
+    return wrapper.error('Failed deleting data');
+  }catch(err){
+    return wrapper.error(`Error delete data Mongo ${err.message}`);
+  }
+}
+
 export {
   insertOne,
   findAll,
   findOne,
-  findPaginated
+  findPaginated,
+  updateOne,
+  deleteData
 };

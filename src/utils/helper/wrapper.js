@@ -1,5 +1,5 @@
 export default class Wrapper{
-  respons(res, status, data){
+  response(res, status, data){
     res.status(status).json(data);
     res.end();
   }
