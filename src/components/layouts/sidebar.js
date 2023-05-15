@@ -6,7 +6,7 @@ import { HiDocumentText } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
 import { removeToken } from '@/utils/server/localstorage';
 
-export default function Sidebar({ active }){
+export default function Sidebar({ page }){
   const router = useRouter();
   const data = [
     'bg-primary-20 text-white',
@@ -30,14 +30,14 @@ export default function Sidebar({ active }){
           </div>
         </div>
         <ul>
-          <li className={`pl-4 mb-1 ${active ? data[0]:data[1]}`}>
+          <li className={`pl-4 ${page === 'home' ? data[0]:data[1]}`}>
             <Link className="flex justify-start items-center font-medium h-10" href="/">
               <HiHome className="text-22 mr-2"/> Home
             </Link>
           </li>
-          <li className={`pl-4 ${active ? data[1]:data[0]}`}>
-            <Link className="flex justify-start items-center font-medium h-10" href="/input-data">
-              <HiDocumentText className="text-22 mr-2"/> Form Input Data
+          <li className={`pl-4 ${page === 'data' ? data[0]:data[1]}`}>
+            <Link className="flex justify-start items-center font-medium h-10" href="/data">
+              <HiDocumentText className="text-22 mr-2"/> Data Mahasiswa
             </Link>
           </li>
         </ul>

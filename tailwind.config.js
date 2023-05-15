@@ -13,9 +13,8 @@ module.exports = {
         '30': '#BEC8FF'
       },
       'natural': {
-        '10': '#3DDE43',
         '20': '#3DDE43',
-        '30': '#F1FEE8'
+        '30': '#E8FCDA'
       },
       'danger':{
         '10': '#FF7555',
@@ -27,7 +26,8 @@ module.exports = {
       },
       'nero':{
         '10': '#EFF4F0',
-        '20': '#D2D4DA'
+        '20': '#D2D4DA',
+        '30': '#D9D9D9'
       }
     },
     extend: {

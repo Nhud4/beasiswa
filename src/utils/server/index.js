@@ -31,4 +31,21 @@ export default class Server{
 
     return result.data;
   }
+
+  async inputData(data){
+    const JSONdata = JSON.stringify(data);
+    const endPoint = '/api/data/insert';
+    const options ={
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSONdata
+    };
+
+    const response = await fetch(endPoint, options);
+    const result = await response.json();
+
+    return result;
+  }
 }
