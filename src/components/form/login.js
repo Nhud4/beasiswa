@@ -15,7 +15,6 @@ export default function LoginForm(){
       const result = await server.login(username, password);
       if(result){
         saveToken(result.accessToken, result.expAccessToken);
-
         router.push('/');
       }
     }catch(err){

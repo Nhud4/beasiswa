@@ -20,7 +20,7 @@ export default function HomeTable(){
   return(
     <div className="bg-white w-full rounded p-2 rounded-lg shadow-1">
       <div className="py-2 flex justify-between items-center">
-        <h2>Data Mahasiswa</h2>
+        <h1 className="text-xl font-semibold pl-1">Data Mahasiswa</h1>
         <div className="flex">
           <div className="mr-4">Search</div>
           <FormModal />
@@ -35,7 +35,8 @@ export default function HomeTable(){
               <div className="table-cell p-4 text-left">Desa</div>
               <div className="table-cell p-4 text-left">Universitas</div>
               <div className="table-cell p-4 text-left">Status Pengajuan</div>
-              <div className="table-cell p-4 text-right rounded-r" />
+              <div className="table-cell p-4 text-left">Tanggal Pengajuan</div>
+              <div className="table-cell p-4 text-right rounded-r">Detail</div>
             </div>
           </div>
           <div className="table-row-group">
@@ -47,11 +48,12 @@ export default function HomeTable(){
                 <p className="table-cell px-4 py-1 capitalize">{item.universitas}</p>
                 <div className="table-cell px-4 py-1">
                   <div className="bg-natural-30 w-fit px-2 py-1 rounded">
-                    <div className="text-natural-20 font-medium">Lulus</div>
+                    <div className="ftext-natural-20 font-medium">Lulus</div>
                   </div>
                 </div>
+                <p className="table-cell px-4 py-1 capitalize">17 Jan 2023</p>
                 <div className="table-cell px-4 py-1 text-right">
-                  <Link className="" href="#">
+                  <Link className="flex justify-center items-center" href="#">
                     <div className="flex justify-center items-center bg-white w-6 h-6 rounded-full shadow-2">
                       <GrNext />
                     </div>

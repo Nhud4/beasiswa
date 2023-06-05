@@ -66,8 +66,7 @@ export default function FormModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handelAdd = async (e) =>{
-    e.preventDefault();
+  const handelAdd = async () =>{
     const result = await server.inputData({
       nama: name,
       umur: age,
@@ -101,8 +100,8 @@ export default function FormModal() {
 
   return (
     <div>
-      <div className="p-1 bg-primary-10 rounded-full shadow-2 cursor-pointer" onClick={handleOpen}>
-        <AddRoundedIcon sx={{ fontSize: 25, color: '#FFFFFF' }}/>
+      <div className="p-1 bg-primary-10 rounded-md shadow-2 cursor-pointer px-2 text-white" onClick={handleOpen}>
+        <AddRoundedIcon sx={{ fontSize: 25, color: '#FFFFFF' }}/> Tambah Data
       </div>
       <Modal
         open={open}
@@ -262,7 +261,12 @@ export default function FormModal() {
             <div className="flex justify-end items-center pt-[8rem]">
               <Stack direction="row" spacing={2}>
                 <Button variant="outlined" startIcon={<DeleteIcon />} onClick={handleClose}>Batal</Button>
-                <Button variant="contained" style={{ backgroundColor: '#1976D2' }} endIcon={<SaveRoundedIcon />}>Simpan</Button>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: '#1976D2' }}
+                  endIcon={<SaveRoundedIcon />}
+                  onClick={handelAdd}
+                >Simpan</Button>
               </Stack>
             </div>
           </TabPanel>
