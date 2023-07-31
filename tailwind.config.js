@@ -7,14 +7,21 @@ module.exports = {
   theme: {
     colors: {
       'white': '#FFFFFF',
+      'black': {
+        '300': '#C6C6C6',
+        '500': '#444444'
+      },
       'primary': {
         '10': '#237B9F',
         '20': '#51ABC5',
-        '30': '#BEC8FF'
+        '30': '#BEC8FF',
+        '40': '#EBF6F8',
+        '50': '#0093AD'
       },
       'natural': {
         '20': '#3DDE43',
-        '30': '#E8FCDA'
+        '30': '#E8FCDA',
+        '40': '#019FDE',
       },
       'danger':{
         '10': '#FF7555',
@@ -22,7 +29,7 @@ module.exports = {
         '30': '#FFF2E7'
       },
       'cyn':{
-        '10': '#FF9F26'
+        '10': '#FF9F26',
       },
       'nero':{
         '10': '#EFF4F0',

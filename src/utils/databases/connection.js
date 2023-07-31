@@ -57,7 +57,7 @@ async function findPaginated(sortByfield, size, page, params, sortBy = null){
     const sortParam = { [sortByfield]: sortBy ? sortBy : 1 };
     const pageParam = size * (page - 1);
     const recordset = await db.find(params).sort(sortParam).limit(size).skip(pageParam).toArray();
-    const { data: totalData } = await this.countAll(params);
+    const totalData = await db.countDocuments(params);
     if(_.isEmpty(recordset)){
       return wrapper.dataPage([], {
         totalData,
@@ -71,6 +71,21 @@ async function findPaginated(sortByfield, size, page, params, sortBy = null){
     });
   }catch(err){
     return wrapper.error(`Error Find Pagination Mongo ${err.message}`);
+  }
+}
+
+async function countData(){
+  try{
+    const client = await clientPromise;
+    const connection = await client.db('beasiswa');
+    const db = await connection.collection('mahasiswa');
+    const totalData = await db.countDocuments();
+
+    return wrapper.dataPage(recordset, {
+      totalData,
+    });
+  }catch(err){
+    return wrapper.error(`Error Count Data Mongo ${err.message}`);
   }
 }
 
@@ -119,5 +134,6 @@ export {
   findOne,
   findPaginated,
   updateOne,
-  deleteData
+  deleteData,
+  countData
 };

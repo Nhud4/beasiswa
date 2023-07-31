@@ -6,11 +6,11 @@ import { HiDocumentText } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
 import { removeToken } from '@/utils/server/localstorage';
 
-export default function Sidebar({ page }){
+export default function Sidebar({ page, hidden }){
   const router = useRouter();
   const data = [
     'bg-primary-20 text-white',
-    'bg-white text-primary-20 hover:bg-primary-20 hover:text-white'
+    'text-primary-20 hover:bg-primary-20 hover:text-white'
   ];
 
   const handelLogout = () =>{
@@ -18,11 +18,11 @@ export default function Sidebar({ page }){
     router.push('/login');
   };
   return(
-    <div className="fixed left-0 top-0 h-full w-[13rem] p-2">
-      <div className="w-full h-full rounded-md bg-white shadow-1">
+    <div className="fixed left-0 top-0 h-full" hidden={hidden}>
+      <div className="w-[15rem] h-full bg-primary-50">
         <div className="p-4">
           <div className="flex justify-center items-center">
-            <Image className="w-[8rem] mr-2" src={require('@/assets/img/logo1.svg')} alt="icon" />
+            <Image className="w-[8rem] mr-2" src={require('@/assets/img/logo.png')} alt="icon" />
           </div>
           <div className="text-center">
             <div className="font-bold">Dinas Pendidikan</div>

@@ -13,7 +13,7 @@ export default async function insert(req, res){
   return wrapper.response(res, 201, {
     message: 'register success',
     code: 201,
-    data: { ...payload },
+    data: insertData,
     success: true
   });
 }

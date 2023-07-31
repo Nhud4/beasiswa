@@ -1,20 +1,17 @@
-import HomeTable from '@/components/table';
+import React from 'react';
 import { HomeChart } from '@/components/chart/home_chart';
-import Sidebar from '@/components/layouts/sidebar';
-import Header from '@/components/layouts/header';
+import { GrafikHome } from '@/components/chart/home_grafik';
 
 export default function Home() {
   return (
     <>
-      <Header summary={true}/>
-      <Sidebar page={'home'}/>
-      <div className="flex justify-center my-8">
-        <div className="container mt-[5.5rem]">
-          <div className="flex justify-start">
-            <div className="w-3/4 mr-4">
-              <HomeTable />
+      <div className="flex justify-center">
+        <div className="container mt-[4rem]">
+          <div className="grid grid-cols-4 gap-6 px-4">
+            <div className="col-span-3">
+              <GrafikHome />
             </div>
-            <div className="w-1/4">
+            <div className="">
               <HomeChart />
             </div>
           </div>

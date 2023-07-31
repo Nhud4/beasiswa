@@ -5,13 +5,15 @@ const dataDomain = new AplicationData();
 const wrapper = new Wrapper();
 
 export default async function list(req, res){
-  const list = await dataDomain.list();
+  const payload = { ...req.query };
+  const list = await dataDomain.list(payload);
   if(list.err) return wrapper.responseError(res, list.err);
 
   return wrapper.response(res, 200, {
+    success: true,
     message: 'register success',
     code: 201,
     data: list.data,
-    success: true
+    meta: list.meta,
   });
 }
