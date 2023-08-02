@@ -4,7 +4,7 @@ import LoginForm from '@/components/form/login';
 
 export default function Login(){
   return(
-    <div className="flex flex-col justify-center items-center -mt-10">
+    <div className="flex flex-col justify-center items-center mt-10">
       <div className="flex justify-center items-center space-x-4">
         <Image className="md:w-[5rem] w-[4rem] mb-2" src={require('@/assets/img/dispen.png')} alt="icon" />
         <div>
@@ -17,7 +17,7 @@ export default function Login(){
       <div className="font-semibold text-20 text-[#8E8E8E] my-6">
         <p>Selamat Datang, Admin Aplikasi.</p>
       </div>
-      <div className="bg-white p-6 rounded-lg shadow-1 w-1/2">
+      <div className="bg-white p-6 rounded-lg shadow-1 w-1/3">
         <LoginForm />
       </div>
     </div>

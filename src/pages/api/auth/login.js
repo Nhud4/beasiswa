@@ -23,9 +23,9 @@ export default async function login(req, res){
     expAccessToken: formatISO(addDays(new Date(), 1))
   };
 
-  return wrapper.response(res, 200, {
+  return wrapper.response(res, 201, {
     message: 'login success',
-    code: 200,
+    code: 201,
     data: data,
     success: true
   });

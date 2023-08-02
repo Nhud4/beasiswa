@@ -12,14 +12,13 @@ export default function LoginForm(){
 
   const handelSubmit = async(e) =>{
     e.preventDefault();
-    try{
-      const result = await server.login(username, password);
-      if(result){
-        saveToken(result.accessToken, result.expAccessToken);
-        router.push('/');
-      }
-    }catch(err){
-      alert('username atau password salah');
+    const result = await server.login(username, password);
+    if(result.code === 500){
+      alert(result.message);
+    }
+    if(result.code === 201){
+      saveToken(result.data.accessToken, result.data.expAccessToken);
+      router.push('/');
     }
   };
 

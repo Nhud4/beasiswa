@@ -8,7 +8,7 @@ export const data = {
   labels: ['Red', 'Blue'],
   datasets: [
     {
-      data: [12, 19],
+      data: [250, 250],
       backgroundColor: [
         'rgba(255, 117, 85, 1)',
         'rgba(35, 123, 159, 1)',
@@ -35,16 +35,16 @@ export function HomeChart() {
             }
           }}
         />
-        <div className="flex justify-center items-center space-x-2 mt-4">
+        <div className="flex justify-center items-center space-x-2 mt-[4.5rem]">
           <div className="border border-nero-20 rounded-md p-1 text-sm">
-            <div className="text-center font-medium">200 Mahasiswa</div>
+            <div className="text-center font-medium">250 Mahasiswa</div>
             <div className="flex justify-center items-center">
               <div className="bg-primary-10 w-3 h-3 rounded-full mr-2"/>
               <div className="text-primary-10">Lulus</div>
             </div>
           </div>
           <div className="border border-nero-20 rounded-md p-1 text-sm">
-            <div className="text-center font-medium">200 Mahasiswa</div>
+            <div className="text-center font-medium">250 Mahasiswa</div>
             <div className="flex justify-center items-center">
               <div className="bg-danger-10 w-3 h-3 rounded-full mr-2"/>
               <div className="text-danger-10">Tidak Lulus</div>

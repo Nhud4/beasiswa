@@ -31,12 +31,12 @@ export const data = {
     {
       label: 'Lulus',
       data: [50, 17, 60, 54, 33 ,170, 90],
-      backgroundColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(31, 40, 85, 1)',
     },
     {
       label: 'Tidak Lulus',
       data: [8, 10, 65, 88, 75, 44, 31],
-      backgroundColor: 'rgb(75, 192, 192)',
+      backgroundColor: 'rgba(0, 147, 173, 1)',
     },
   ],
 };

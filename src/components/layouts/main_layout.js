@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
+import Header from './header';
 
 export default function MainLayout(props) {
   const [hidden, setHidden] = useState(true);
@@ -25,7 +26,15 @@ export default function MainLayout(props) {
   return (
     <>
       <Sidebar page={page} hidden={hidden}/>
-      <main className="pt-28">{children}</main>
+      <div className="sticky top-0 ml-[15rem]" hidden={hidden}>
+        <div className="grid h-[5.1rem] grid-cols-6 shadow-1">
+          <div className="bg-white h-[5.1rem] col-span-5" />
+          <div className="col-start-6 bg-white h-[5.1rem]">
+            <Header />
+          </div>
+        </div>
+      </div>
+      <main className="">{children}</main>
     </>
   );
 }

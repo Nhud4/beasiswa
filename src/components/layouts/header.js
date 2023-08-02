@@ -1,45 +1,39 @@
-import React from 'react';
-import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
+import OutsideClickHandler from 'react-outside-click-handler';
+import { useRouter } from 'next/router';
+import { removeToken } from '@/utils/server/localstorage';
 import Profile from '../card/Profile';
-import SummaryCard from '../card/summary';
 
-export default function Header({ summary }){
+export default function Header(){
+  const [show, setShow] = useState(false);
+  const router = useRouter();
+
+  const handelLogout = () =>{
+    removeToken('accessToken');
+    router.push('/login');
+  };
+
+  useEffect(() => {
+    setShow(true);
+  }, []);
+
   return(
-    <>
-      <div className="absolute left-0 top-0 w-full bg-primary-10 h-[8rem]">
-        <div className="pl-[13.5rem] pr-5 pt-5">
-          <div className="flex justify-between mb-8">
-            <div className="text-white">
-              <div className="font-semibold text-35">Aplikasi Beasiswa Satu Desa Dua Sarjana</div>
-              <div className="font-medium text-20">Dinas Pendidikan Kabupaten Bojonegoro</div>
-            </div>
-            <Profile />
-          </div>
-          <div className={`flex justify-between w-full ${summary ? '': 'hidden'}`}>
-            <SummaryCard>
-              <Image className="w-fit rounded-full shadow-2" src={require('@/assets/icon/Blue.svg')} alt="icon" />
-              <div>
-                <div className="font-semibold">Totap Pendaftar Beasiswa</div>
-                <div>500</div>
-              </div>
-            </SummaryCard>
-            <SummaryCard>
-              <Image className="w-fit rounded-full shadow-2" src={require('@/assets/icon/Green.svg')} alt="icon" />
-              <div>
-                <div className="font-semibold">Pendaftar Lolos</div>
-                <div>500</div>
-              </div>
-            </SummaryCard>
-            <SummaryCard>
-              <Image className="w-fit rounded-full shadow-2" src={require('@/assets/icon/Red.svg')} alt="icon" />
-              <div>
-                <div className="font-semibold">Pendaftar Tidak Lolos</div>
-                <div>500</div>
-              </div>
-            </SummaryCard>
+    <div className="bg-white p-4">
+      <div onClick={() => setShow(() => setShow(true))} className="cursor-pointer">
+        <Profile />
+      </div>
+      <OutsideClickHandler onOutsideClick={() => setShow(true)}>
+        <div className="absolute right-0 p-4" hidden={show} >
+          <div
+            className="flex items-center space-x-2 p-2 bg-white rounded-md shadow-1 border border-[#EBF6F8] cursor-pointer"
+            onClick={handelLogout}
+          >
+            <RiLogoutCircleRLine className="text-sm text-[#767676] font-light"/>
+            <div className="text-sm text-[#767676] font-light">Logout</div>
           </div>
         </div>
-      </div>
-    </>
+      </OutsideClickHandler>
+    </div>
   );
 }
