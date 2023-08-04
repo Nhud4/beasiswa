@@ -26,10 +26,6 @@ export default function LoginForm(){
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   const styles = {
     activeBox: 'flex items-center p-2 rounded border-2 border-primary-50 bg-primary-40 h-[2.5rem]',
     inactiveBox: 'flex items-center p-2 rounded border-2 border-black-300 h-[2.5rem]',

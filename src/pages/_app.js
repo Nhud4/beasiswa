@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '@/styles/globals.css';
 import { useRouter } from 'next/router';
 import MainLayout from '@/components/layouts/main_layout';

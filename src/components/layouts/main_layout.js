@@ -12,21 +12,25 @@ export default function MainLayout(props) {
   useEffect(() => {
     if(location.pathname === '/login'){
       setHidden(true);
+    } else {
+      setHidden(false);
     }
+
     if(location.pathname === '/'){
       setPage('home');
-      setHidden(false);
     }
-    if(location.pathname === '/data'){
+    if(location.pathname === '/data') {
       setPage('data');
-      setHidden(false);
+    }
+    if(location.pathname === '/tambah') {
+      setPage('tambah');
     }
   }, [location]);
 
   return (
     <>
       <Sidebar page={page} hidden={hidden}/>
-      <div className="sticky top-0 ml-[15rem]" hidden={hidden}>
+      <div className="sticky top-0 ml-[15rem] z-50" hidden={hidden}>
         <div className="grid h-[5.1rem] grid-cols-6 shadow-1">
           <div className="bg-white h-[5.1rem] col-span-5" />
           <div className="col-start-6 bg-white h-[5.1rem]">

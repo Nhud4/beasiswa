@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { HiHome } from 'react-icons/hi';
 import { HiDocumentText } from 'react-icons/hi2';
+import { MdAssignmentAdd } from 'react-icons/md';
 import Profile from '../card/Profile';
 
 export default function Sidebar({ page, hidden }){
@@ -25,13 +26,18 @@ export default function Sidebar({ page, hidden }){
         </div>
         <ul className="mt-2">
           <li className={`pl-4 ${page === 'home' ? data[0]:data[1]}`}>
-            <Link className="flex justify-start items-center font-medium h-10" href="/">
+            <Link className="flex justify-start items-center font-medium h-12" href="/">
               <HiHome className="text-22 mr-2"/> Home
             </Link>
           </li>
           <li className={`pl-4 ${page === 'data' ? data[0]:data[1]}`}>
-            <Link className="flex justify-start items-center font-medium h-10" href="/data">
+            <Link className="flex justify-start items-center font-medium h-12" href="/data">
               <HiDocumentText className="text-22 mr-2"/> Data Mahasiswa
+            </Link>
+          </li>
+          <li className={`pl-4 ${page === 'tambah' ? data[0]:data[1]}`}>
+            <Link className="flex justify-start items-center font-medium h-12" href="/tambah">
+              <MdAssignmentAdd className="text-22 mr-2"/> Tambah Data
             </Link>
           </li>
         </ul>

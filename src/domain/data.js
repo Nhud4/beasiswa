@@ -134,11 +134,10 @@ export default class AplicationData{
         }
       };
 
-      // const insertData = await insertOne(data, collection);
-      // if(insertData.err)throw { message: 'fail to insert data mahasiswa' };
+      const insertData = await insertOne(data, collection);
+      if(insertData.err)throw { message: 'fail to insert data mahasiswa' };
 
-      // return insertData;
-      return data;
+      return insertData;
     }catch(err){
       return { err: new InternalServerError(err.message) };
     }
