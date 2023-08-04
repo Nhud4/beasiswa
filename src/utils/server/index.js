@@ -20,16 +20,16 @@ export default class Server{
     return result;
   }
 
-  async listData(){
-    const endPoint = '/api/data/list';
+  async listData(params){
+    const endPoint = `/api/data/list?size=${params.size}&page=${params.page}&sort=nama_mahasiswa&order=${params.order}&search=${params.search}`;
     const options ={
-      method: 'GET'
+      method: 'GET',
     };
 
     const response = await fetch(endPoint, options);
     const result = await response.json();
 
-    return result.data;
+    return result;
   }
 
   async inputData(data){
@@ -47,5 +47,17 @@ export default class Server{
     const result = await response.json();
 
     return result;
+  }
+
+  async detailData(params){
+    const endPoint = `/api/data/detail/${params}`;
+    const options ={
+      method: 'GET'
+    };
+
+    const response = await fetch(endPoint, options);
+    const result = await response.json();
+
+    return result.data;
   }
 }

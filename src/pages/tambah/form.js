@@ -19,7 +19,7 @@ export default function FormAdd(){
   const [univ, setUniv] = useState('');
   const [fakultas, setFakultas] = useState('');
   const [prodi, setProdi] = useState('');
-  const [semester, setSemester] = useState(2);
+  const [semester, setSemester] = useState('');
   const [khs, setKhs] = useState({});
   const [jenisUniv, setJenisUniv] = useState('');
   const [akreditasi, setAkreditasi] = useState('');
@@ -38,6 +38,12 @@ export default function FormAdd(){
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const disabled = Boolean(
+    name && nik && noKk && ayah && nim && tempatLahir && tanggalLahir && umur &&
+    ibu && address && desa && kecamatan && kabupaten && noHp && univ && fakultas &&
+    prodi && semester && jenisUniv && akreditasi && jenisKartu && ukt
+  );
 
   return(
     <form onSubmit={handleSubmit}>
@@ -226,24 +232,32 @@ export default function FormAdd(){
           </div>
           <div className="space-y-2">
             <h2>Jenis Universitas</h2>
-            <div className="border border-nero-20 p-2 rounded-md">
-              <input
-                placeholder="Masukkan Jenis Universitas"
-                className="outline-none w-full"
+            <div className="border border-nero-20 px-2 rounded-md">
+              <select
+                className="outline-none bg-white w-full h-full py-2"
                 onChange={(e) => setJenisUniv(e.target.value)}
                 value={jenisUniv}
-              />
+              >
+                <option value={''} disabled>Pilih Jenis Universitas</option>
+                <option value={'PTN'}>PTN</option>
+                <option value={'PTS'}>PTS</option>
+              </select>
             </div>
           </div>
           <div className="space-y-2">
             <h2>Akreditasi Universitas</h2>
-            <div className="border border-nero-20 p-2 rounded-md">
-              <input
-                placeholder="Masukkan Akreditasi Universitas"
-                className="outline-none w-full"
+            <div className="border border-nero-20 px-2 rounded-md">
+              <select
+                className="outline-none bg-white w-full h-full py-2"
                 onChange={(e) => setAkreditasi(e.target.value)}
                 value={akreditasi}
-              />
+              >
+                <option value={''} disabled>Pilih Akreditasi Universitas</option>
+                <option value={'A'}>Akreditasi A</option>
+                <option value={'B'}>Akreditasi B</option>
+                <option value={'C'}>Akreditasi C</option>
+                <option value={'D'}>Akreditasi D</option>
+              </select>
             </div>
           </div>
           <div className="space-y-2">
@@ -410,7 +424,9 @@ export default function FormAdd(){
           <button className="border px-10 py-2 rounded-md">
             Batal
           </button>
-          <button className="bg-primary-50 text-white px-10 py-2 rounded-md">
+          <button
+            className={!disabled ? 'bg-nero-20 text-white px-10 py-2 rounded-md cursor-not-allowed':'bg-primary-50 text-white px-10 py-2 rounded-md cursor-pointer'}
+            disabled={!disabled}>
             Simpan
           </button>
         </div>
