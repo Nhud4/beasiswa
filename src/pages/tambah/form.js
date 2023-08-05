@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Radio } from 'antd';
+import { useRouter } from 'next/router';
+import Server from '@/utils/server';
 
 export default function FormAdd(){
+  const server = new Server();
+  const router = useRouter();
+
   const [name, setName] = useState('');
   const [nik, setNik]= useState('');
   const [noKk, setNoKk] = useState('');
@@ -27,6 +32,7 @@ export default function FormAdd(){
   const [noRek, setNoRek] = useState('');
   const [jenisKartu, setJenisKartu] = useState('KPM');
   const [ukt, setUkt] = useState('');
+  const [gender, setGender] = useState('');
 
   const kartu = [
     { label: 'KPM', value: 'KPM' },
@@ -35,8 +41,43 @@ export default function FormAdd(){
     { label: 'SKTM', value: 'SKTM' },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    const insertData = {
+      nama_mahasiswa: name,
+      nik: nik,
+      no_kk: noKk,
+      kepala_keluarga: ayah,
+      nim: nim,
+      tempat_lahir: tempatLahir,
+      tanggal_lahir: tanggalLahir,
+      umur: parseInt(umur),
+      nama_ibu: ibu,
+      alamat: address,
+      desa: desa,
+      kecamatan: kecamatan,
+      kabupaten: kabupaten,
+      no_hp: noHp,
+      universitas: univ,
+      fakultas: fakultas,
+      prodi: prodi,
+      semester: semester,
+      nilai_khs: [khs.sm1, khs.sm2, khs.sm3, khs.sm4, khs.sm5, khs.sm6, khs.sm7, khs.sm8],
+      jenis_univ: jenisUniv,
+      akreditasi: akreditasi,
+      bank: bank,
+      no_rekening: noRek,
+      jenis_kartu: jenisKartu,
+      ukt: parseInt(ukt),
+      gender: gender,
+    };
+
+    const response = await server.inputData(insertData);
+    if(response.code === 201){
+      alert('Berhasil Menambahkan Data', router.replace('/data'));
+    }else{
+      alert(response?.message);
+    }
   };
 
   const disabled = Boolean(
@@ -80,6 +121,20 @@ export default function FormAdd(){
                 onChange={(e) => setNoKk(e.target.value)}
                 value={noKk}
               />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h2>Jenis kelamin</h2>
+            <div className="border border-nero-20 px-2 rounded-md">
+              <select
+                className="outline-none bg-white w-full h-full py-2"
+                onChange={(e) => setGender(e.target.value)}
+                value={gender}
+              >
+                <option value={''} disabled>Pilih Jenis Kelamin</option>
+                <option value={'laki-laki'}>Laki - Laki</option>
+                <option value={'perempuan'}>Perempuan</option>
+              </select>
             </div>
           </div>
           <div className="space-y-2">
@@ -132,7 +187,7 @@ export default function FormAdd(){
             <h2>Tanggal Lahir</h2>
             <div className="border border-nero-20 p-2 rounded-md">
               <input
-                placeholder="Masukkan Tanggal Lahir"
+                placeholder="DD-MM-YYYY"
                 className="outline-none w-full"
                 onChange={(e) => setTanggalLahir(e.target.value)}
                 value={tanggalLahir}

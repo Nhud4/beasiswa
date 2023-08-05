@@ -60,4 +60,17 @@ export default class Server{
 
     return result.data;
   }
+
+  async deleteData(params){
+    const endPoint = `/api/data/deleted/${params}`;
+    const options ={
+      method: 'GET'
+    };
+
+    const response = await fetch(endPoint, options);
+    const result = await response.json();
+
+    return result.data;
+  }
+
 }

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { ObjectId } from 'mongodb';
-import { findOne, findAll, insertOne, updateOne, findPaginated, countData } from '@/utils/databases/connection';
+import { findOne, insertOne, updateOne, findPaginated, countData, deleteData } from '@/utils/databases/connection';
 import { NotFoundError, InternalServerError, UnprocessableEntityError } from '@/utils/helper/error';
 import dataTesting from './algoritma/dataTesting';
 import Probability from './algoritma/probabilitas';
@@ -35,29 +35,32 @@ export default class AplicationData{
         jenis_kartu,
         ukt,
         jenis_univ,
-        akreditasi
+        akreditasi,
+        gender
       } = payload;
 
-      // const checkName = await findOne({ nama_mahasiswa: nama_mahasiswa }, collection);
-      // if(checkName.err)throw { message: 'fail to get data by name' };
-      // if(!_.isEmpty(checkName.data)){
-      //   return { err: new UnprocessableEntityError('name already exists', [{
-      //     field: 'name',
-      //     message: 'name already exists'
-      //   }]) };
-      // }
+      const checkName = await findOne({ nama_mahasiswa: nama_mahasiswa }, collection);
+      if(checkName.err)throw { message: 'fail to get data by name' };
+      if(!_.isEmpty(checkName.data)){
+        return { err: new UnprocessableEntityError('name telah digunakan', [{
+          field: 'name',
+          message: 'name telah digunakan'
+        }]) };
+      }
 
-      // const checkNik = await findOne({ nik: nik }, collection);
-      // if(checkNik.err)throw { message: 'fail to get data by nik' };
-      // if(!_.isEmpty(checkNik.data)){
-      //   return { err: new UnprocessableEntityError('nik already exists', [{
-      //     field: 'nik',
-      //     message: 'nik already exists'
-      //   }]) };
-      // }
+      const checkNik = await findOne({ nik: nik }, collection);
+      if(checkNik.err)throw { message: 'fail to get data by nik' };
+      if(!_.isEmpty(checkNik.data)){
+        return { err: new UnprocessableEntityError('nik telah digunakan', [{
+          field: 'nik',
+          message: 'nik telah digunakan'
+        }]) };
+      }
 
-      // const count = await countData();
-      // if(count.err)throw { message: 'fail to count data' };
+      const count = await countData();
+      console.log(count);
+      if(count.err)throw { message: 'fail to count data' };
+
       const totalData = 0;
       const dataProbabilitas = await Probability(dataTesting);
       const nilaiIps = nilai_khs?.slice(-1);
@@ -104,6 +107,7 @@ export default class AplicationData{
       const data = {
         no: totalData + 1,
         nama_mahasiswa,
+        gender,
         nik,
         no_kk,
         kepala_keluarga,
@@ -131,7 +135,8 @@ export default class AplicationData{
           niliaiLulus: probLulus,
           nilaiTidalLulus: probTidakLulus,
           totalProbabilitas,
-        }
+        },
+        createdAt: new Date(),
       };
 
       const insertData = await insertOne(data, collection);
@@ -217,8 +222,26 @@ export default class AplicationData{
       const data = await Probability(dataTesting);
 
       return data;
-    }catch {
+    }catch(err) {
       return { err: new InternalServerError('fail algoritma') };
+    }
+  }
+
+  async dataDeleted(payload){
+    try{
+      const { userId } = payload;
+      const getUser = await findOne({ _id: new ObjectId(userId) }, collection);
+      if(getUser.err)throw { message: 'fial to get detail' };
+      if(_.isEmpty(getUser.data)){
+        return { err: new NotFoundError('data not found') };
+      }
+
+      const deleted = await deleteData({ _id: new ObjectId(userId) }, collection);
+      if(deleted.err)throw { message: 'fail to delete data' };
+
+      return deleted;
+    }catch(err){
+      return { err: new InternalServerError(err.message) };
     }
   }
 }

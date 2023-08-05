@@ -81,7 +81,7 @@ async function countData(){
     const db = await connection.collection('mahasiswa');
     const totalData = await db.countDocuments();
 
-    return wrapper.dataPage(recordset, {
+    return wrapper.dataPage({
       totalData,
     });
   }catch(err){

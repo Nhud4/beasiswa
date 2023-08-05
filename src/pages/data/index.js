@@ -6,7 +6,7 @@ export default function Data(){
   return(
     <div className="flex justify-center my-8">
       <div className="container">
-        <div className="pl-2 pr-4">
+        <div className="p-2">
           <HeaderPage
             title={'Data Mahasiswa'}
             breadcrumbs={[

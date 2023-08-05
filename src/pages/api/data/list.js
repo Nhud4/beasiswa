@@ -11,8 +11,8 @@ export default async function list(req, res){
 
   return wrapper.response(res, 200, {
     success: true,
-    message: 'register success',
-    code: 201,
+    message: 'success to get data',
+    code: 200,
     data: list.data,
     meta: list.meta,
   });

@@ -12,7 +12,6 @@ export default function Detail(){
 
   const router = useRouter();
   const { userId } = router.query;
-  const nilaiKhs = ['3.50', '3.50', '3.50'];
 
   const detail = async(userId) =>{
     const result = await server.detailData(userId);
@@ -25,6 +24,13 @@ export default function Detail(){
 
   const formtIdr = (params) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(params);
+  };
+
+  const handleDeleted = async() => {
+    const result = await server.deleteData(userId);
+    if(result.code === 201){
+      alert('Data Berhasil DiHapus', router.replace('/data'));
+    }
   };
 
   return (
@@ -55,10 +61,18 @@ export default function Detail(){
                 <div>
                   <h1 className="text-xl font-semibold">{data?.nama_mahasiswa}</h1>
                   <h2 className="text-[18px] font-semibold text-[#0093AD]">{data?.nim}</h2>
+                  <div className="bg-primary-20 h-fit px-4 text-white rounded-md w-fit">
+                    <p>{data?.jenis_kartu}</p>
+                  </div>
                 </div>
               </div>
-              <div className="bg-primary-20 h-fit px-4 py-2 text-white rounded-md">
-                <p>{data?.jenis_kartu}</p>
+              <div className="flex flex-col justify-between">
+                <button
+                  className="text-danger-20 border border-danger-20 rounded-md mb-2 px-2 py-1 hover:bg-danger-20 hover:text-white"
+                  onClick={handleDeleted}
+                >
+                  Hapus Data
+                </button>
               </div>
             </div>
             <div className="border-b border-nero-20 py-4">
