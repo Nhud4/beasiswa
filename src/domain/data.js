@@ -58,7 +58,6 @@ export default class AplicationData{
       }
 
       const count = await countData();
-      console.log(count);
       if(count.err)throw { message: 'fail to count data' };
 
       const totalData = 0;
