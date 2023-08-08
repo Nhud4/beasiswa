@@ -130,7 +130,7 @@ export default class AplicationData{
 
       const data = {
         no: totalData + 1,
-        nama_mahasiswa,
+        nama_mahasiswa: nama_mahasiswa.toUpperCase(),
         gender,
         nik,
         no_kk,

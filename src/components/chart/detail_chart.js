@@ -4,24 +4,26 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ['Red', 'Blue'],
-  datasets: [
-    {
-      data: [250, 250],
-      backgroundColor: [
-        'rgba(255, 117, 85, 1)',
-        'rgba(35, 123, 159, 1)',
-      ],
-      borderColor: [
-        'rgba(255, 255, 255, 1)'
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 
-export function DetailChart() {
+export function DetailChart({ nilai }) {
+
+  const data = {
+    labels: ['Tidak Lulus', 'Lulus'],
+    datasets: [
+      {
+        data: [nilai?.lulus || 0.1, nilai?.tidakLulus || 0.1],
+        backgroundColor: [
+          'rgba(255, 117, 85, 1)',
+          'rgba(35, 123, 159, 1)',
+        ],
+        borderColor: [
+          'rgba(255, 255, 255, 1)'
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return(
     <>
       <div className="py-4 px-2 rounded-lg border-2 border-nero-20">

@@ -85,7 +85,6 @@ export default function FormAdd(){
     ibu && address && desa && kecamatan && kabupaten && noHp && univ && fakultas &&
     prodi && semester && jenisUniv && akreditasi && jenisKartu && ukt
   );
-
   return(
     <form onSubmit={handleSubmit}>
       <div className="bg-white w-full p-4 rounded-md shadow-1">

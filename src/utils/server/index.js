@@ -70,7 +70,7 @@ export default class Server{
     const response = await fetch(endPoint, options);
     const result = await response.json();
 
-    return result.data;
+    return result;
   }
 
 }

@@ -12,7 +12,7 @@ export default function Detail(){
 
   const router = useRouter();
   const { userId } = router.query;
-
+  console.log(data);
   const detail = async(userId) =>{
     const result = await server.detailData(userId);
     setData(result);
@@ -181,10 +181,10 @@ export default function Detail(){
               <h1 className="text-xl text-[#444444] font-semibold">Tingkat Kelulusan</h1>
               <div className="grid grid-cols-4 gap-4 mt-4">
                 <div className="col-span-3">
-                  <DetailGrafik />
+                  <DetailGrafik nilai={data?.beasiswa}/>
                 </div>
                 <div>
-                  <DetailChart />
+                  <DetailChart nilai={data?.beasiswa?.totalProbabilitas}/>
                 </div>
               </div>
             </div>
