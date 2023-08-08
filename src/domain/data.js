@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { ObjectId } from 'mongodb';
-import { findOne, insertOne, updateOne, findPaginated, countData, deleteData } from '@/utils/databases/connection';
+import { findOne, findAll, insertOne, updateOne, findPaginated, countData, deleteData } from '@/utils/databases/connection';
 import { NotFoundError, InternalServerError, UnprocessableEntityError } from '@/utils/helper/error';
 import dataTesting from './algoritma/dataTesting';
 import Probability from './algoritma/probabilitas';
@@ -60,14 +60,39 @@ export default class AplicationData{
       const count = await countData();
       if(count.err)throw { message: 'fail to count data' };
 
-      const totalData = 0;
+      const dataDb = await findAll(collection);
+      if(dataDb.err)throw { message: 'fail to get all data' };
+
+      const dataMapDb = dataDb?.data.map((item) => {
+        return{
+          nama_mahasiswa: item.nama_mahasiswa.toUpperCase(),
+          umur: item.umur <= 25 ? 'MEMENUHI' : 'TIDAK',
+          ips: item.nilai_khs[item.semester - 1] >= 3 ? 'CUKUP': 'TIDAK CUKUP',
+          jenis_kartu: item.jenis_kartu,
+          univ: item.jenis_univ,
+          akreditasi: item.akreditasi,
+        };
+      });
+
+      let checkData = [];
+      for (let i = 0; i < dataMapDb.length; i++) {
+        checkData = dataTesting.filter(({ nama_mahasiswa }) => dataMapDb[i].nama_mahasiswa === nama_mahasiswa);
+      }
+
+      if(checkData.length === 0){
+        for (let a = 0; a < dataMapDb.length; a++) {
+          dataTesting.push(dataMapDb[a]);
+        }
+      }
+
+      const totalData = count.data.totalData + 1;
       const dataProbabilitas = await Probability(dataTesting);
-      const nilaiIps = nilai_khs?.slice(-1);
+
       const dataKasus = {
         nama_mahasiswa,
         umur: umur <= 25 ? 'MEMENUHI' : 'TIDAK',
-        ips: nilaiIps[0] >= 3 ? 'CUKUP': 'TIDAK CUKUP',
-        jenis_kartu: 'KPM',
+        ips: nilai_khs[semester - 1] >= 3 ? 'CUKUP': 'TIDAK CUKUP',
+        jenis_kartu: jenis_kartu,
         univ: jenis_univ,
         akreditasi,
       };
