@@ -23,25 +23,39 @@ export const options = {
   responsive: true,
 };
 
-const labels = ['KIP', 'KPM', 'SKTM', 'PKH', 'PTN', 'PTS', 'IPK'];
+const labels = ['KIP', 'KPM', 'SKTM', 'PKH', 'PTN', 'PTS'];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Lulus',
-      data: [50, 17, 60, 54, 33 ,170, 90],
-      backgroundColor: 'rgba(31, 40, 85, 1)',
-    },
-    {
-      label: 'Tidak Lulus',
-      data: [8, 10, 65, 88, 75, 44, 31],
-      backgroundColor: 'rgba(0, 147, 173, 1)',
-    },
-  ],
-};
+export function GrafikHome({ value }) {
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Lulus',
+        data: [
+          value?.dataKIP?.lulus,
+          value?.dataKPM?.lulus,
+          value?.dataSKTM?.lulus,
+          value?.dataPKH?.lulus,
+          value?.dataPTN?.lulus,
+          value?.dataPTS?.lulus
+        ],
+        backgroundColor: 'rgba(31, 40, 85, 1)',
+      },
+      {
+        label: 'Tidak Lulus',
+        data: [
+          value?.dataKIP?.tidak,
+          value?.dataKPM?.tidak,
+          value?.dataSKTM?.tidak,
+          value?.dataPKH?.tidak,
+          value?.dataPTN?.tidak,
+          value?.dataPTS?.tidak
+        ],
+        backgroundColor: 'rgba(0, 147, 173, 1)',
+      },
+    ],
+  };
 
-export function GrafikHome() {
   return (
     <div className="bg-white p-4 rounded-md shadow-1">
       <Bar options={options} data={data} />

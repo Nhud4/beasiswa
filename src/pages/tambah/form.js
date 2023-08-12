@@ -306,7 +306,7 @@ export default function FormAdd(){
                 onChange={(e) => setAkreditasi(e.target.value)}
                 value={akreditasi}
               >
-                <option value={''} disabled>Pilih Akreditasi Universitas</option>
+                <option value={''} disabled>Pilih Akreditasi</option>
                 <option value={'A'}>Akreditasi A</option>
                 <option value={'B'}>Akreditasi B</option>
                 <option value={'C'}>Akreditasi C</option>

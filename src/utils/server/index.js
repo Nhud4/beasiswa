@@ -73,4 +73,16 @@ export default class Server{
     return result;
   }
 
+  async summary(){
+    const endPoint = '/api/data/summary';
+    const options ={
+      method: 'GET'
+    };
+
+    const response = await fetch(endPoint, options);
+    const result = await response.json();
+
+    return result;
+  }
+
 }

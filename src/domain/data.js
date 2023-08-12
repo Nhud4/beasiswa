@@ -268,4 +268,61 @@ export default class AplicationData{
       return { err: new InternalServerError(err.message) };
     }
   }
+
+  async summaryData(){
+    try{
+      const getData = await findAll(collection);
+      if(getData.err)throw { message: 'fail to get all data' };
+
+      const totalData = getData.data.length;
+      const dataLulus = getData.data.filter(({ beasiswa }) => beasiswa.totalProbabilitas.kesimpulan === 'lulus');
+      const dataTidakLulus = getData.data.filter(({ beasiswa }) => beasiswa.totalProbabilitas.kesimpulan !== 'lulus');
+      const dataLulusKIP = dataLulus.filter(({ jenis_kartu }) => jenis_kartu === 'KIP');
+      const dataTidakKIP = dataTidakLulus.filter(({ jenis_kartu }) => jenis_kartu === 'KIP');
+      const dataLKPM = dataLulus.filter(({ jenis_kartu }) => jenis_kartu === 'KPM');
+      const dataTKPM = dataTidakLulus.filter(({ jenis_kartu }) => jenis_kartu === 'KPM');
+      const dataLSKTM = dataLulus.filter(({ jenis_kartu }) => jenis_kartu === 'SKTM');
+      const dataTSKTM = dataTidakLulus.filter(({ jenis_kartu }) => jenis_kartu === 'SKTM');
+      const dataLPKH = dataLulus.filter(({ jenis_kartu }) => jenis_kartu === 'PKH');
+      const dataTPKH = dataTidakLulus.filter(({ jenis_kartu }) => jenis_kartu === 'PKH');
+      const dataLPTN = dataLulus.filter(({ jenis_univ }) => jenis_univ === 'PTN');
+      const dataTPTN = dataTidakLulus.filter(({ jenis_univ }) => jenis_univ === 'PTN');
+      const dataLPTS = dataLulus.filter(({ jenis_univ }) => jenis_univ === 'PTS');
+      const dataTPTS = dataTidakLulus.filter(({ jenis_univ }) => jenis_univ === 'PTS');
+
+      const data = {
+        totalData,
+        dataLulus: dataLulus.length,
+        dataTidakLulus: dataTidakLulus.length,
+        dataKIP: {
+          lulus: dataLulusKIP.length,
+          tidak: dataTidakKIP.length
+        },
+        dataKPM: {
+          lulus: dataLKPM.length,
+          tidak: dataTKPM.length
+        },
+        dataSKTM: {
+          lulus: dataLSKTM.length,
+          tidak: dataTSKTM.length
+        },
+        dataPKH: {
+          lulus: dataLPKH.length,
+          tidak: dataTPKH.length
+        },
+        dataPTN: {
+          lulus: dataLPTN.length,
+          tidak: dataTPTN.length
+        },
+        dataPTS: {
+          lulus: dataLPTS.length,
+          tidak: dataTPTS.length
+        }
+      };
+
+      return data;
+    }catch(err){
+      return { err: new InternalServerError(err.message) };
+    }
+  }
 }

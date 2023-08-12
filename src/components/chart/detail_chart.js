@@ -11,7 +11,7 @@ export function DetailChart({ nilai }) {
     labels: ['Tidak Lulus', 'Lulus'],
     datasets: [
       {
-        data: [nilai?.lulus || 0.1, nilai?.tidakLulus || 0.1],
+        data: [nilai?.tidakLulus, nilai?.lulus],
         backgroundColor: [
           'rgba(255, 117, 85, 1)',
           'rgba(35, 123, 159, 1)',
